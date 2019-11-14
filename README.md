@@ -1,2 +1,3 @@
-# simple_shell
+# Simple shell
+
 Shell project for Holberton School
