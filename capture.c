@@ -27,14 +27,17 @@ int main(int ac __attribute__((unused)), char *argv[] __attribute__((unused)),
 		char *env[])
 {
 	char *buf = NULL, **arr, *pat, *tok;
-	int j = 0, flag = 0;
+	int j = 0, flag = 0, interactive = 1;
 	size_t len = 0;
 	ssize_t read;
 
 	while (1)
 	{
 		arr = malloc(sizeof(char *) * 32);
-		_print("$ ");
+		if (isatty(STDIN_FILENO) == 0)
+			interactive = 0;
+		if (interactive == 1)
+			_print("$ ");
 		read = getline(&buf, &len, stdin);
 		if (read == -1)
 		{
