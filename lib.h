@@ -17,4 +17,5 @@ unsigned int _strlen(char *s);
 void _print(char *str);
 int _strncmp(char *s1, char *s2, int n);
 int execute(char *path, char **arr, char **environ);
+char **_toktok(char *buf);
 #endif

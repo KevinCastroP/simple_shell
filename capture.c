@@ -15,7 +15,6 @@ void free_list(char **path)
 	}
 	free(path);
 }
-
 /**
  * main - function of Simple Shell project
  * @ac: (void)
@@ -24,16 +23,15 @@ void free_list(char **path)
  * Return: a value
  */
 int main(int ac __attribute__((unused)), char *argv[] __attribute__((unused)),
-		char *env[])
+	 char *env[])
 {
-	char *buf = NULL, **arr, *pat, *tok;
-	int j = 0, flag = 0, interactive = 1;
+	char *buf = NULL, **arr = NULL, *pat;
+	int flag = 0, interactive = 1;
 	size_t len = 0;
 	ssize_t read;
 
 	while (1)
 	{
-		arr = malloc(sizeof(char *) * 32);
 		if (isatty(STDIN_FILENO) == 0)
 			interactive = 0;
 		if (interactive == 1)
@@ -41,28 +39,24 @@ int main(int ac __attribute__((unused)), char *argv[] __attribute__((unused)),
 		read = getline(&buf, &len, stdin);
 		if (read == -1)
 		{
-			free(arr);
-			free(buf);
+			if (buf != NULL)
+				free(buf);
+			buf = NULL;
 			return (127);
 		}
 		if (read > 1 && *buf != 9)
 		{
-			tok = strtok(buf, " \n\r\t");
-			for (j = 0; tok != NULL; j++)
-			{
-				arr[j] = tok;
-				tok = strtok(NULL, " \n\r\t");
-			}
-			arr[j] = NULL;
+			arr = _toktok(buf);
 			pat = _parse_path(env, arr[0], &flag);
 			execute(pat, arr, env);
-
 			if (flag == 1)
 				free(pat);
 			flag = 0;
 		}
-		free(buf);
-		free(arr);
+		if (buf != NULL)
+			free(buf);
+		if (arr != NULL)
+			free(arr);
 		buf = NULL;
 		arr = NULL;
 		pat = NULL;
