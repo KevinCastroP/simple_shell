@@ -1,11 +1,11 @@
 #include "lib.h"
 /**
- * execute - ...
- * @path: ...
- * @arr: ...
- * @environ: ...
+ * execute - function to verify the child process and execute a command
+ * @path: recieve the variables
+ * @arr: a value
+ * @environ: string to calling system
  *
- * Return: ...
+ * Return: a value
  */
 int execute(char *path, char **arr, char **environ)
 {
