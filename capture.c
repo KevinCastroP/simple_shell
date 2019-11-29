@@ -30,6 +30,8 @@ int main(int ac __attribute__((unused)), char *argv[] __attribute__((unused)),
 	size_t len = 0;
 	ssize_t read;
 
+	signal(SIGINT, jksing);
+
 	while (1)
 	{
 		if (isatty(STDIN_FILENO) == 0)

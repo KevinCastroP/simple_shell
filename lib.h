@@ -13,6 +13,8 @@ char *_parse_path(char *env[], char *pat, int *flag);
 char *_strcat(char *dest, char *src);
 /*function of h_func.c*/
 char *_strdup(char *duplicate);
+/*function to handle the signal ^C*/
+void jksing(int hsign);
 unsigned int _strlen(char *s);
 void _print(char *str);
 int _strncmp(char *s1, char *s2, int n);
