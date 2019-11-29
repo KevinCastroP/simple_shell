@@ -42,7 +42,7 @@ int main(int ac __attribute__((unused)), char *argv[] __attribute__((unused)),
 			if (buf != NULL)
 				free(buf);
 			buf = NULL;
-			return (127);
+			return (0);
 		}
 		if (read > 1 && *buf != 9)
 		{

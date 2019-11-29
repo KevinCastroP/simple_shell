@@ -10,7 +10,7 @@
 int execute(char *path, char **arr, char **environ)
 {
 	pid_t child_pid;
-	int i = 0, status = 0;
+	int status = 0;
 
 	child_pid = fork();
 	if (child_pid == -1)
@@ -20,17 +20,11 @@ int execute(char *path, char **arr, char **environ)
 	}
 	if (child_pid == 0)
 	{
-		i = execve(path, arr, environ);
-		if (i == -1)
-		{
-			perror("execve");
-			return (0);
-		}
+		execve(path, arr, environ);
 	}
 	else
 	{
-		while (wait(&status) != child_pid)
-			_print("...\n");
+		wait(&status);
 	}
 	return (0);
 }
